@@ -4,8 +4,8 @@ body{
 }
 
 #game{
-    background: url("images/background.png");
-    background-size: cover;
+    background: url("images/Background.jpg");
+    background-size: contain;
     height: 100vh;
     width: 100vw;
 }
@@ -13,8 +13,27 @@ body{
 #pipe{
     background: url("images/Pipe.png");
     background-position: center;
-    left: 50vw;
     height: 100vh;
     width: 45px;
     position: relative;
+}
+
+#bird{
+    background: url("images/Bird.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 120px;
+    width: 50px;
+}
+
+#hole{
+    background: url("images/Hole.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    top: -500px;
+    height: 200px;
+    width: 100px;
+
 }

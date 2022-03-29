@@ -11,29 +11,37 @@ body{
 }
 
 #pipe{
-    background: url("images/Pipe.png");
-    background-position: center;
+    background: url("images/Pipe.png") center;
     height: 100vh;
     width: 45px;
     position: relative;
+    animation: pipe-movement 4s linear infinite;
 }
 
 #bird{
-    background: url("images/Bird.png");
+    background: url("images/Bird.png") no-repeat;
     background-size: contain;
-    background-repeat: no-repeat;
     position: absolute;
     height: 120px;
     width: 50px;
 }
 
 #hole{
-    background: url("images/Hole.jpg");
+    background: url("images/Hole.jpg") no-repeat;
     background-size: contain;
-    background-repeat: no-repeat;
     position: relative;
     top: -500px;
     height: 200px;
     width: 100px;
+    animation: pipe-movement 4s linear infinite;
+}
 
+@keyframes pipe-movement {
+    0% {left: 100vw;}
+    100% {left: -50px;}
+}
+
+@keyframes hole-movement {
+    0% {left: 100vw;}
+    100% {left: -50px;}
 }

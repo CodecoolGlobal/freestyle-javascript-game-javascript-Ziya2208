@@ -1,14 +1,11 @@
-import {collisionDetection} from "utils/utils.js";
+import {collisionDetection} from "/utils/utils.js";
 
-//function getObjects() {
 let hole = document.getElementById("hole");
 let pipe = document.getElementById("pipe");
 let bird = document.getElementById("bird");
 let score = 0;
-//}
 
 function positionHoleRandomly() {
-    console.log("position randomly")
     hole.addEventListener("animationiteration", () => {
         const max = 57 * window.innerHeight / 100;
         const min = 97 * window.innerHeight / 100;

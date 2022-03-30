@@ -14,19 +14,15 @@ function initGame() {
 
 }
 
+
+
 initGame();
 
 
 
 
-let bird = document.getElementById("bird");
+let bird = document.getElementById('bird')
 
-function gravity_start( dircetion ) {
-    setInterval(_ => {
-        if ( direction === 'down' ) return
-        bird_animation({ direction: 'down' })
-    })
-}
 
 function bird_animation( direction ) {
     if ( direction === 'down' ) {
@@ -39,5 +35,30 @@ function bird_animation( direction ) {
     }
 }
 
-gravity_start();
+var jumping = 0
+
+setInterval (function() {
+    var birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
+    if (jumping === 0) {
+        bird.style.top = (birdTop + 3) + 'px';
+    }
+    }, 10)
+
+function jump() {
+    jumping = 1;
+    let jumpCount = 0;
+    var jumpInterval = setInterval(function() {
+        var birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
+        bird.style.top = (birdTop-5)+'px';
+        if (jumpCount > 20) {
+            clearInterval(jumpInterval);
+            jumping = 0;
+            jumpCount = 0;
+        }
+        jumpCount++;
+    }
+    , 10);
+}
+
+
 

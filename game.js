@@ -15,3 +15,29 @@ function initGame() {
 }
 
 initGame();
+
+
+
+
+let bird = document.getElementById("bird");
+
+function gravity_start( dircetion ) {
+    setInterval(_ => {
+        if ( direction === 'down' ) return
+        bird_animation({ direction: 'down' })
+    })
+}
+
+function bird_animation( direction ) {
+    if ( direction === 'down' ) {
+        bird.classList.remove('go-up')
+        bird.classList.add('go-down')
+    }
+    else if ( direction === 'up' ) {
+        bird.classList.remove('go-down')
+        bird.classList.add('go-up')
+    }
+}
+
+gravity_start();
+

@@ -23,31 +23,15 @@ initGame();
 
 let bird = document.getElementById('bird')
 
-
-function bird_animation( direction ) {
-    if ( direction === 'down' ) {
-        bird.classList.remove('go-up')
-        bird.classList.add('go-down')
-    }
-    else if ( direction === 'up' ) {
-        bird.classList.remove('go-down')
-        bird.classList.add('go-up')
-    }
-}
-
-var game = 1
 var jumping = 0
 
 setInterval (function() {
     var birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
     if (jumping === 0) {
         bird.style.top = (birdTop + 3) + 'px';
+        bird.style.animation = 'rotateDown 2.2s infinite ease';
     }
     }, 10)
-
-if (jumping === 0) {
-        bird.style.animation = 'rotateDown 2.2s infinite ease'
-    }
 
 function jump() {
     jumping = 1;
@@ -55,6 +39,7 @@ function jump() {
     var jumpInterval = setInterval(function() {
         var birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
         bird.style.top = (birdTop-5)+'px';
+        bird.style.animation = 'rotateUp 0.5s'
         if (jumpCount > 20) {
             clearInterval(jumpInterval);
             jumping = 0;

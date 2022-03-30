@@ -49,6 +49,11 @@ body{
     100% { transform: rotate( 35deg ) }
 }
 
+@keyframes rotateUp {
+    0% { transform: rotate( 0deg ) }
+    100% { transform: rotate( -35deg ) }
+}
+
 @keyframes pipe-movement {
     0% {left: 100vw;}
     100% {left: -50px;}

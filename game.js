@@ -31,7 +31,7 @@ setInterval (function() {
         bird.style.top = (birdTop + 3) + 'px';
         bird.style.animation = 'rotateDown 2.2s infinite ease';
     }
-    }, 10)
+    }, 15)
 
 function jump() {
     jumping = 1;
@@ -47,7 +47,7 @@ function jump() {
         }
         jumpCount++;
     }
-    , 10);
+    , 15);
 }
 
 

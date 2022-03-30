@@ -35,6 +35,7 @@ function bird_animation( direction ) {
     }
 }
 
+var game = 1
 var jumping = 0
 
 setInterval (function() {
@@ -43,6 +44,10 @@ setInterval (function() {
         bird.style.top = (birdTop + 3) + 'px';
     }
     }, 10)
+
+if (jumping === 0) {
+        bird.style.animation = 'rotateDown 2.2s infinite ease'
+    }
 
 function jump() {
     jumping = 1;

@@ -3,7 +3,7 @@ import {collisionDetection} from "/utils/utils.js";
 let hole = document.getElementById("hole");
 let pipe = document.getElementById("pipe");
 let bird = document.getElementById("bird");
-let score = 0;
+let scoreValue = 0;
 
 function positionHoleRandomly() {
     hole.addEventListener("animationiteration", () => {
@@ -15,16 +15,20 @@ function positionHoleRandomly() {
 }
 
 function handleCollisions() {
-    const holeCoordinates = hole.getBoundingClientRect();
-    const pipeCoordinates = pipe.getBoundingClientRect();
-    const birdCoordinates = bird.getBoundingClientRect();
-    const collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
-    const collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
-    if (collisionPipe && !collisionHole) {
-        gameOver()
-    } else if (collisionHole && !collisionPipe) {
-        score++;
-    }
+    setInterval(() => {
+        let holeCoordinates = hole.getBoundingClientRect();
+        let pipeCoordinates = pipe.getBoundingClientRect();
+        const birdCoordinates = bird.getBoundingClientRect();
+        let collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
+        let collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
+        if (collisionPipe && !collisionHole) {
+            return gameOver()
+        } else if (collisionHole) {
+            scoreValue++;
+            let score = document.getElementById("score");
+            score.innerText = `Score: ${scoreValue}`;
+        }
+    }, 10)
 }
 
 function gameOver() {

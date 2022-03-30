@@ -1,13 +1,14 @@
-
-let score;
+import {collisionDetection} from "utils/utils.js";
 
 //function getObjects() {
 let hole = document.getElementById("hole");
 let pipe = document.getElementById("pipe");
 let bird = document.getElementById("bird");
+let score = 0;
 //}
 
 function positionHoleRandomly() {
+    console.log("position randomly")
     hole.addEventListener("animationiteration", () => {
         const max = 57 * window.innerHeight / 100;
         const min = 97 * window.innerHeight / 100;
@@ -20,14 +21,22 @@ function handleCollisions() {
     const holeCoordinates = hole.getBoundingClientRect();
     const pipeCoordinates = pipe.getBoundingClientRect();
     const birdCoordinates = bird.getBoundingClientRect();
+    const collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
+    const collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
+    if (collisionPipe && !collisionHole) {
+        gameOver()
+    } else if (collisionHole && !collisionPipe) {
+        score++;
+    }
 }
 
-
+function gameOver() {
+    alert("Game Over!");
+}
 
 function initGame() {
-    positionHoleRandomly()
-    // Your game can start here, but define separate functions, don't write everything in here :)
-
+    positionHoleRandomly();
+    handleCollisions();
 }
 
 initGame();

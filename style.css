@@ -34,7 +34,7 @@ body{
     position: relative;
     top: -600px;
     height: 200px;
-    width: 100px;
+    width: 45px;
     animation: pipe-movement 4s linear infinite;
 }
 

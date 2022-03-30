@@ -15,6 +15,7 @@ function positionHoleRandomly() {
 }
 
 function handleCollisions() {
+    let gameStopped = false;
     setInterval(() => {
         let holeCoordinates = hole.getBoundingClientRect();
         let pipeCoordinates = pipe.getBoundingClientRect();
@@ -22,11 +23,13 @@ function handleCollisions() {
         let collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
         let collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
         if (collisionPipe && !collisionHole) {
-            return gameOver()
+            gameStopped = true;
+            return gameOver();
         } else if (collisionHole) {
             scoreValue++;
             let score = document.getElementById("score");
             score.innerText = `Score: ${scoreValue}`;
+            clearInterval();
         }
     }, 10)
 }

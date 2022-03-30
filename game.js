@@ -1,5 +1,13 @@
+
+let score;
+
+//function getObjects() {
+let hole = document.getElementById("hole");
+let pipe = document.getElementById("pipe");
+let bird = document.getElementById("bird");
+//}
+
 function positionHoleRandomly() {
-    let hole = document.getElementById("hole");
     hole.addEventListener("animationiteration", () => {
         const max = 57 * window.innerHeight / 100;
         const min = 97 * window.innerHeight / 100;
@@ -7,6 +15,14 @@ function positionHoleRandomly() {
         hole.style.top = `-${randomTop}px`;
     })
 }
+
+function handleCollisions() {
+    const holeCoordinates = hole.getBoundingClientRect();
+    const pipeCoordinates = pipe.getBoundingClientRect();
+    const birdCoordinates = bird.getBoundingClientRect();
+}
+
+
 
 function initGame() {
     positionHoleRandomly()

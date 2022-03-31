@@ -56,35 +56,27 @@ function gameOver() {
     bird.style.animation = "paused";
     gravityStopped = true;
     gameStopped = true;
-    gameOverScreen.style.display = "block"
+    gameOverScreen.style.display = "block";
 }
 
 function restartGame() {
-    gameOverScreen.style.display = "none"
-    score.innerText = "Score: 0";
-    gravityStopped = false;
-    gameStopped = false;
-    bird.style.top = "20vh";
-    bird.style.left = "20vw";
-    hole.style.animationPlayState = "running";
-    pipe.style.animationPlayState = "running";
-    bird.style.animation = "running";
+    location.reload();
 }
 
 function gravity() {
    setInterval (function() {
-    let birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
-    if (birdTop + 3 < 0) {
-        return gameOver();
-    }
-    if (birdTop + 3 > window.innerHeight) {
-        return gameOver();
-    }
-    if (jumping === 0 && !gravityStopped && !gameStopped) {
-        bird.style.top = (birdTop + 3) + 'px';
-        bird.style.animation = 'rotateDown 2.2s infinite ease';
-    }
-    }, 15)
+       let birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
+       if (birdTop + 3 < 0) {
+           return gameOver();
+        }
+       if (birdTop + 3 > window.innerHeight) {
+           return gameOver();
+        }
+       if (jumping === 0 && !gravityStopped && !gameStopped) {
+           bird.style.top = (birdTop + 3) + 'px';
+           bird.style.animation = 'rotateDown 2.2s infinite ease';
+       }
+   }, 15)
 }
 
 function jump() {

@@ -22,7 +22,7 @@ body{
     background: url("images/Bird.png") no-repeat;
     background-size: contain;
     position: absolute;
-    height: 120px;
+    height: 40px;
     width: 50px;
     top: 20vh;
     left: 20vw;
@@ -34,7 +34,7 @@ body{
     position: relative;
     top: -600px;
     height: 200px;
-    width: 100px;
+    width: 45px;
     animation: pipe-movement 4s linear infinite;
 }
 

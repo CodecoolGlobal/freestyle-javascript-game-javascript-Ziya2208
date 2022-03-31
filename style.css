@@ -8,6 +8,7 @@ body{
     background-size: contain;
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 }
 
 #pipe{
@@ -38,10 +39,26 @@ body{
     animation: pipe-movement 4s linear infinite;
 }
 
-
 .go-down {
     animation: rotateDown 0.2s;
     animation-fill-mode:forwards;
+}
+
+#game-over {
+    display: none;
+    left: 0;
+    text-align: center;
+    top: 25%;
+    width: 100%;
+    position: absolute;
+}
+
+#score {
+    left: 0;
+    text-align: left;
+    top: 0%;
+    width: 100%;
+    position: absolute;
 }
 
 @keyframes rotateDown {

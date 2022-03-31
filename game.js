@@ -8,9 +8,8 @@ let button = document.getElementById("button");
 button.addEventListener("click", restartGame);
 let gameOverScreen = document.getElementById("game-over")
 let scoreValue = 0;
-let detectionPaused = false;
-let pauseLength = 300;
-let pauseBegin = 0;
+let round = 0;
+let roundController = 0;
 let jumping = 0;
 let gravityStopped = false;
 let gameStopped = false;
@@ -36,28 +35,33 @@ function positionHoleRandomly() {
 
 function handleCollisions() {
     setInterval(() => {
-        if (pauseBegin !== 0 && detectionPaused && Date.now() - (pauseBegin + pauseLength) > 0) {
-            detectionPaused = false;
-        }
-        if (!detectionPaused) {
-            const holeCoordinates = hole.getBoundingClientRect();
-            const pipeCoordinates = pipe.getBoundingClientRect();
-            const birdCoordinates = bird.getBoundingClientRect();
-            const collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
-            const collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
+        const holeCoordinates = hole.getBoundingClientRect();
+        const pipeCoordinates = pipe.getBoundingClientRect();
+        const birdCoordinates = bird.getBoundingClientRect();
+        const collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
+        const collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
 
-            if (collisionPipe && !collisionHole) {
-                return gameOver();
-            } else if (collisionHole) {
-                soundHole()
-                let holeDetections = 1;
-                scoreValue = scoreValue + holeDetections;
-                score.innerText = `Score: ${scoreValue}`;
-                detectionPaused = true;
-                pauseBegin = Date.now();
+        if (collisionPipe && !collisionHole) {
+            return gameOver();
+        } else if (collisionHole) {
+            if (round > roundController) {
+                soundHole();
+                scoreValue++;
+                roundController++
             }
+            score.innerText = `Score: ${scoreValue}`;
         }
-        }, 10);
+    }, 10)
+}
+
+function resetCounter() {
+    round = 1
+}
+
+function roundCounter() {
+    hole.addEventListener( 'animationiteration', _ => {
+        round++
+    })
 }
 
 function gameOver() {
@@ -114,6 +118,8 @@ function keyboardJump() {
 
 function initGame() {
     positionHoleRandomly();
+    roundCounter();
+    resetCounter();
     handleCollisions();
     gravity();
     jump();

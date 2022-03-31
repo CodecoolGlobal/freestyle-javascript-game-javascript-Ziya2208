@@ -39,6 +39,7 @@ function handleCollisions() {
                 score.innerText = `Score: ${scoreValue}`;
                 detectionPaused = true;
                 pauseBegin = Date.now();
+                soundHole()
             }
         }
         }, 10);
@@ -80,6 +81,10 @@ function jump() {
         jumpCount++;
     }
     , 15);
+}
+
+function soundHole() {
+    (new Audio('/sounds/hole.wav')).play();
 }
 
 function sound() {

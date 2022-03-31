@@ -8,6 +8,7 @@ let scoreValue = 0;
 let detectionPaused = false;
 let pauseLength = 300;
 let pauseBegin = 0;
+let jumping = 0
 
 function positionHoleRandomly() {
     hole.addEventListener("animationiteration", () => {
@@ -20,7 +21,7 @@ function positionHoleRandomly() {
 
 function handleCollisions() {
     setInterval(() => {
-        if (pauseBegin != 0 && detectionPaused && Date.now() - (pauseBegin + pauseLength) > 0) {
+        if (pauseBegin !== 0 && detectionPaused && Date.now() - (pauseBegin + pauseLength) > 0) {
             detectionPaused = false;
         }
         if (!detectionPaused) {
@@ -47,35 +48,21 @@ function gameOver() {
     alert("Game Over!");
 }
 
-function initGame() {
-    positionHoleRandomly();
-    handleCollisions();
-}
-
-
-
-initGame();
-
-
-
-
-let bird = document.getElementById('bird')
-
-var jumping = 0
-
-setInterval (function() {
-    var birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
+function gravity() {
+   setInterval (function() {
+    let birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
     if (jumping === 0) {
         bird.style.top = (birdTop + 3) + 'px';
         bird.style.animation = 'rotateDown 2.2s infinite ease';
     }
     }, 15)
+}
 
 function jump() {
     jumping = 1;
     let jumpCount = 0;
-    var jumpInterval = setInterval(function() {
-        var birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
+    let jumpInterval = setInterval(function() {
+        let birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
         bird.style.top = (birdTop-5)+'px';
         bird.style.animation = 'rotateUp 0.5s'
         if (jumpCount > 20) {
@@ -88,5 +75,16 @@ function jump() {
     , 15);
 }
 
+function keyboardJump() {
+    document.addEventListener("keydown", jump)
+}
 
+function initGame() {
+    positionHoleRandomly();
+    handleCollisions();
+    gravity();
+    jump();
+    keyboardJump();
+}
 
+initGame();

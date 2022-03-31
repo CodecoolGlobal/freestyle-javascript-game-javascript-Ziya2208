@@ -1,5 +1,6 @@
 import {collisionDetection} from "/utils/utils.js";
 
+
 let hole = document.getElementById("hole");
 let pipe = document.getElementById("pipe");
 let bird = document.getElementById("bird");
@@ -38,7 +39,7 @@ function handleCollisions() {
         const holeCoordinates = hole.getBoundingClientRect();
         const pipeCoordinates = pipe.getBoundingClientRect();
         const birdCoordinates = bird.getBoundingClientRect();
-        const collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
+        const collisionHole = collisionDetection(birdCoordinates, holeCoordinates, {y1: -55, y2: 58});
         const collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
 
         if (collisionPipe && !collisionHole) {

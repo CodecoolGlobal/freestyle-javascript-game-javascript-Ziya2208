@@ -9,6 +9,16 @@ let jumping = 0
 let round = 0
 let roundController = 0
 
+function soundHole() {
+    (new Audio('/sounds/hole.wav')).play();
+}
+function sound() {
+    (new Audio('/sounds/fly.wav')).play();
+}
+function soundGameOver() {
+    (new Audio('/sounds/gameover.wav')).play()
+}
+
 
 function positionHoleRandomly() {
     hole.addEventListener("animationiteration", () => {
@@ -31,26 +41,17 @@ function handleCollisions() {
             return gameOver();
         } else if (collisionHole) {
             if (round > roundController) {
+                soundHole()
                 scoreValue++;
                 roundController++
             }
             score.innerText = `Score: ${scoreValue}`;
-            if (collisionPipe && !collisionHole) {
-                return gameOver();
-            } else if (collisionHole) {
-                let holeDetections = 1;
-                scoreValue = scoreValue + holeDetections;
-                score.innerText = `Score: ${scoreValue}`;
-                detectionPaused = true;
-                pauseBegin = Date.now();
-                soundHole()
-            }
         }
     }, 10)
 }
 
 function gameOver() {
-    (new Audio('/sounds/gameover.wav')).play()
+    soundGameOver();
 }
 
 function gravity() {
@@ -85,14 +86,6 @@ function jump() {
         jumpCount++;
     }
     , 15);
-}
-
-function soundHole() {
-    (new Audio('/sounds/hole.wav')).play();
-}
-
-function sound() {
-    (new Audio('/sounds/fly.wav')).play();
 }
 
 function keyboardJump() {

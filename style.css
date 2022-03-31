@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'pressStart';
+    src: url('/font/PressStart2P-Regular.ttf')
+}
+
+h1 {
+    font-family: 'pressStart';
+    font-size: 30px;
+    color: white;
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -54,12 +65,21 @@ body{
 }
 
 #score {
+    font-family: 'pressStart';
+    color: white;
     left: 0;
     text-align: left;
     top: 0%;
     width: 100%;
     position: absolute;
 }
+
+#button {
+    background-color: aliceblue;
+    font-family: pressStart;
+    border-color: green;
+}
+
 
 @keyframes rotateDown {
     0% { transform: rotate( 0deg ) }

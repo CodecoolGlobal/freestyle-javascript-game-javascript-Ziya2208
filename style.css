@@ -22,7 +22,7 @@ body{
     background: url("images/Bird.png") no-repeat;
     background-size: contain;
     position: absolute;
-    height: 120px;
+    height: 40px;
     width: 50px;
     top: 20vh;
     left: 20vw;

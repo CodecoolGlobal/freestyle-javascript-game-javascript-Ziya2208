@@ -65,13 +65,13 @@ function roundCounter() {
 }
 
 function gameOver() {
+    soundGameOver();
     hole.style.animationPlayState = "paused";
     pipe.style.animationPlayState = "paused";
     bird.style.animation = "paused";
     gravityStopped = true;
     gameStopped = true;
     gameOverScreen.style.display = "block";
-    soundGameOver();
 }
 
 function restartGame() {

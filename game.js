@@ -72,7 +72,6 @@ function gameOver() {
     gravityStopped = true;
     gameStopped = true;
     gameOverScreen.style.display = "block";
-    soundGameOver();
 }
 
 function restartGame() {

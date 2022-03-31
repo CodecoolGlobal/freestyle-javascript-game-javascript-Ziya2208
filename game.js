@@ -4,11 +4,17 @@ let hole = document.getElementById("hole");
 let pipe = document.getElementById("pipe");
 let bird = document.getElementById("bird");
 let score = document.getElementById("score");
+let button = document.getElementById("button");
+button.addEventListener("click", restartGame);
+let gameOverScreen = document.getElementById("game-over")
 let scoreValue = 0;
 let detectionPaused = false;
 let pauseLength = 300;
 let pauseBegin = 0;
-let jumping = 0
+let jumping = 0;
+let gravityStopped = false;
+let gameStopped = false;
+
 
 function positionHoleRandomly() {
     hole.addEventListener("animationiteration", () => {
@@ -45,7 +51,24 @@ function handleCollisions() {
 }
 
 function gameOver() {
-    alert("Game Over!");
+    hole.style.animationPlayState = "paused";
+    pipe.style.animationPlayState = "paused";
+    bird.style.animation = "paused";
+    gravityStopped = true;
+    gameStopped = true;
+    gameOverScreen.style.display = "block"
+}
+
+function restartGame() {
+    gameOverScreen.style.display = "none"
+    score.innerText = "Score: 0";
+    gravityStopped = false;
+    gameStopped = false;
+    bird.style.top = "20vh";
+    bird.style.left = "20vw";
+    hole.style.animationPlayState = "running";
+    pipe.style.animationPlayState = "running";
+    bird.style.animation = "running";
 }
 
 function gravity() {
@@ -57,7 +80,7 @@ function gravity() {
     if (birdTop + 3 > window.innerHeight) {
         return gameOver();
     }
-    if (jumping === 0) {
+    if (jumping === 0 && !gravityStopped && !gameStopped) {
         bird.style.top = (birdTop + 3) + 'px';
         bird.style.animation = 'rotateDown 2.2s infinite ease';
     }

@@ -51,6 +51,12 @@ function gameOver() {
 function gravity() {
    setInterval (function() {
     let birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
+    if (birdTop + 3 < 0) {
+        return gameOver();
+    }
+    if (birdTop + 3 > window.innerHeight) {
+        return gameOver();
+    }
     if (jumping === 0) {
         bird.style.top = (birdTop + 3) + 'px';
         bird.style.animation = 'rotateDown 2.2s infinite ease';

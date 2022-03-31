@@ -3,7 +3,11 @@ import {collisionDetection} from "/utils/utils.js";
 let hole = document.getElementById("hole");
 let pipe = document.getElementById("pipe");
 let bird = document.getElementById("bird");
+let score = document.getElementById("score");
 let scoreValue = 0;
+let detectionPaused = false;
+let pauseLength = 300;
+let pauseBegin = 0;
 
 function positionHoleRandomly() {
     hole.addEventListener("animationiteration", () => {
@@ -15,23 +19,28 @@ function positionHoleRandomly() {
 }
 
 function handleCollisions() {
-    let gameStopped = false;
     setInterval(() => {
-        let holeCoordinates = hole.getBoundingClientRect();
-        let pipeCoordinates = pipe.getBoundingClientRect();
-        const birdCoordinates = bird.getBoundingClientRect();
-        let collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
-        let collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
-        if (collisionPipe && !collisionHole) {
-            gameStopped = true;
-            return gameOver();
-        } else if (collisionHole) {
-            scoreValue++;
-            let score = document.getElementById("score");
-            score.innerText = `Score: ${scoreValue}`;
-            clearInterval();
+        if (pauseBegin != 0 && detectionPaused && Date.now() - (pauseBegin + pauseLength) > 0) {
+            detectionPaused = false;
         }
-    }, 10)
+        if (!detectionPaused) {
+            const holeCoordinates = hole.getBoundingClientRect();
+            const pipeCoordinates = pipe.getBoundingClientRect();
+            const birdCoordinates = bird.getBoundingClientRect();
+            const collisionHole = collisionDetection(birdCoordinates, holeCoordinates);
+            const collisionPipe = collisionDetection(birdCoordinates, pipeCoordinates);
+
+            if (collisionPipe && !collisionHole) {
+                return gameOver();
+            } else if (collisionHole) {
+                let holeDetections = 1;
+                scoreValue = scoreValue + holeDetections;
+                score.innerText = `Score: ${scoreValue}`;
+                detectionPaused = true;
+                pauseBegin = Date.now();
+            }
+        }
+        }, 10);
 }
 
 function gameOver() {

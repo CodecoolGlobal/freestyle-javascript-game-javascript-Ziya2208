@@ -45,7 +45,7 @@ function handleCollisions() {
 }
 
 function gameOver() {
-    alert("Game Over!");
+    (new Audio('/sounds/gameover.wav')).play()
 }
 
 function gravity() {
@@ -65,12 +65,13 @@ function gravity() {
 }
 
 function jump() {
+    sound()
     jumping = 1;
     let jumpCount = 0;
     let jumpInterval = setInterval(function() {
         let birdTop = parseInt(getComputedStyle(bird).getPropertyValue('top'));
         bird.style.top = (birdTop-5)+'px';
-        bird.style.animation = 'rotateUp 0.5s'
+        bird.style.animation = 'rotateUp 0.5s';
         if (jumpCount > 20) {
             clearInterval(jumpInterval);
             jumping = 0;
@@ -81,9 +82,14 @@ function jump() {
     , 15);
 }
 
-function keyboardJump() {
-    document.addEventListener("keydown", jump)
+function sound() {
+    (new Audio('/sounds/fly.wav')).play();
 }
+
+function keyboardJump() {
+    document.addEventListener("keydown", jump);
+}
+
 
 function initGame() {
     positionHoleRandomly();
